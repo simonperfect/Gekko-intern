@@ -1,0 +1,22 @@
+# Use the fixed service names: api, mock_ocr, mock_onboarding, nginx
+# (+ mongo if you chose MongoDB). Conditions: README.md Q3.
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: q3_deploy/Dockerfile
+    env_file: .env            # create .env from .env.example — never commit it
+    # TODO: database data volume, depends_on, healthcheck (Q3.2)
+
+  mock_ocr:
+    build: ../mock_ocr
+  mock_onboarding:
+    build: ../mock_onboarding
+
+  nginx:
+    image: nginx:1.27-alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    # TODO: depends_on — nginx should only start once api is READY (Q3.2)

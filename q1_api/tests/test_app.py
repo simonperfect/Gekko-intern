@@ -14,9 +14,8 @@ import sys
 
 client = TestClient(app)
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))  #absolute path 
 
-from app.main import app, batches_db, cases_db  # noqa: E402
 
 
 @pytest.fixture(autouse=True)
